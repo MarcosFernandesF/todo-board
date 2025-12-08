@@ -37,7 +37,6 @@ O código foi estruturado visando a escalabilidade e a testabilidade, separando 
 Para executar este projeto, você precisará ter instalado em sua máquina:
 
 - Node.js (Versão 16 ou superior recomendada)
-- npm (Gerenciador de pacotes)
 
 ## Como Rodar o Projeto
 
