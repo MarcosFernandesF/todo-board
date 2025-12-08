@@ -7,16 +7,6 @@
       :placeholder="placeholder" 
     />
 
-    <select v-model="selectValue" class="task-select">
-      <option 
-        v-for="option in options" 
-        :key="option.value" 
-        :value="option.value"
-      >
-        {{ option.label }}
-      </option>
-    </select>
-
     <button class="add-button" @click="emitTaskCreation">
       +
     </button>
@@ -28,7 +18,7 @@ import { ref } from 'vue'
 
 const emit = defineEmits(['task-creation'])
 
-const props = defineProps({
+defineProps({
   options: {
     type: Array,
     required: true
@@ -41,8 +31,6 @@ const props = defineProps({
 
 const inputValue = ref('')
 
-const selectValue = ref(props.options[0]?.value || '')
-
 const emitTaskCreation = () => {
   if (!inputValue.value.trim()) return;
 
@@ -51,7 +39,7 @@ const emitTaskCreation = () => {
   emit('task-creation', {
     id: now.getTime(),
     title: inputValue.value,
-    status: selectValue.value,
+    status: 'todo',
     createdAt: now.toLocaleString('en-US')
   })
 

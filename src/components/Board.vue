@@ -8,7 +8,6 @@
 
   <NewTaskInput 
     class="task-input-container"
-    :options="statusOptions"
     placeholder="Type the title of your task..."
     @task-creation="createNewTask"
   />
@@ -45,11 +44,6 @@ import NewTaskInput from './NewTaskInput.vue';
 
 const STORAGE_KEY_TODO = 'todo-items';
 const STORAGE_KEY_DONE = 'done-items';
-
-const statusOptions = [
-  { value: 'todo', label: 'To Do' },
-  { value: 'done', label: 'Done' },
-]
 
 const todoItems = ref([]);
 const doneItems = ref([]);
