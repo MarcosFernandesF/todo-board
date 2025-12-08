@@ -5,29 +5,28 @@
 
   <main class="board-columns">
     <section class="board-column">
-      <h2>todo</h2>
-      <ul id="todoColumn">
+      <BoardColumn title="To Do">
         <TaskCard 
           v-for="item in mockTodo" 
           :key="item.id" 
           :task="item" 
         />
-      </ul>
+      </BoardColumn>
     </section>
     <section>
-      <h2>done</h2>
-      <ul id="doneColumn">
+      <BoardColumn title="Done">
         <TaskCard 
           v-for="item in mockDone" 
           :key="item.id" 
           :task="item" 
         />
-      </ul>
+      </BoardColumn>
     </section>
   </main>
 </template>
 
 <script setup>
+import BoardColumn from './BoardColumn.vue';
 import TaskCard from './TaskCard.vue'
 
 const mockTodo = [
