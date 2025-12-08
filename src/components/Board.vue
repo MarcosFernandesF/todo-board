@@ -7,36 +7,51 @@
     <section class="board-column">
       <h2>todo</h2>
       <ul id="todoColumn">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        <TaskCard 
+          v-for="item in mockTodo" 
+          :key="item.id" 
+          :task="item" 
+        />
       </ul>
     </section>
     <section>
       <h2>done</h2>
       <ul id="doneColumn">
-        <li>Item 4</li>
-        <li>Item 5</li>
-        <li>Item 6</li>
+        <TaskCard 
+          v-for="item in mockDone" 
+          :key="item.id" 
+          :task="item" 
+        />
       </ul>
     </section>
   </main>
 </template>
 
-<script>
+<script setup>
+import TaskCard from './TaskCard.vue'
 
+const mockTodo = [
+  { id: 1, title: 'Item 1' },
+  { id: 2, title: 'Item 2' },
+  { id: 3, title: 'Item 3' }
+]
+
+const mockDone = [
+  { id: 4, title: 'Item 4' },
+  { id: 5, title: 'Item 5' }
+]
 </script>
 
 <style scoped>
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .board-columns {
   display: flex;
   gap: 50px;
-  border: 1px solid red;
-  border-radius: 5px;
-}
-
-.board-column {
-  border: 1px solid grey;
-  border-radius: 5px;
+  justify-content: center;
+  padding: 20px;
 }
 </style>
