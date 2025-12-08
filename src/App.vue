@@ -1,7 +1,8 @@
-<script setup>
-import Board from './components/Board.vue'
-</script>
-
 <template>
   <Board />
 </template>
+
+<script setup>
+import Board from './components/Board.vue'
+
+</script>
