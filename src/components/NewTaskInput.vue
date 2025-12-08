@@ -17,7 +17,7 @@
       </option>
     </select>
 
-    <button class="add-button" @click="EmitTaskCreation">
+    <button class="add-button" @click="emitTaskCreation">
       +
     </button>
   </div>
@@ -43,7 +43,7 @@ const inputValue = ref('')
 
 const selectValue = ref(props.options[0]?.value || '')
 
-const EmitTaskCreation = () => {
+const emitTaskCreation = () => {
   if (!inputValue.value.trim()) return;
 
   const now = new Date();
