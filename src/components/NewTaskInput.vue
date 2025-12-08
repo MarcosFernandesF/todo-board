@@ -1,12 +1,13 @@
 <template>
   <div class="new-task-container">
-    <input 
+    <input
+      v-model="inputValue"
       type="text" 
       class="task-input" 
       :placeholder="placeholder" 
     />
 
-    <select class="task-select">
+    <select v-model="selectValue" class="task-select">
       <option 
         v-for="option in options" 
         :key="option.value" 
@@ -16,14 +17,18 @@
       </option>
     </select>
 
-    <button class="add-button">
+    <button class="add-button" @click="EmitTaskCreation">
       +
     </button>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref } from 'vue'
+
+const emit = defineEmits(['task-creation'])
+
+const props = defineProps({
   options: {
     type: Array,
     required: true
@@ -33,6 +38,23 @@ defineProps({
     default: 'Default Placeholder...'
   }
 })
+
+const inputValue = ref('')
+
+const selectValue = ref(props.options[0]?.value || '')
+
+const EmitTaskCreation = () => {
+  if (!inputValue.value.trim()) return;
+
+  emit('task-creation', {
+    title: inputValue.value,
+    status: selectValue.value,
+    createdAt: new Date().toLocaleString('en-US')
+  })
+
+  inputValue.value = ''
+}
+
 </script>
 
 <style scoped>

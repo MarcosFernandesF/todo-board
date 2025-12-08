@@ -1,6 +1,7 @@
 <template>
   <li class="task-card">
-    {{ task.title }}
+    <p>Title: {{ task.title }}</p>
+    <p>CreatedAt: {{ task.createdAt }}</p>
   </li>
 </template>
 

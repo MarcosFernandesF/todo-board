@@ -7,13 +7,14 @@
     class="task-input-container"
     :options="statusOptions"
     placeholder="Type the title of your task..."
+    @task-creation="CreateNewTask"
   />
 
   <main class="board-columns">
     <section class="board-column">
       <BoardColumn title="To Do">
         <TaskCard 
-          v-for="item in mockTodo" 
+          v-for="item in todoItems" 
           :key="item.id" 
           :task="item" 
         />
@@ -22,7 +23,7 @@
     <section>
       <BoardColumn title="Done">
         <TaskCard 
-          v-for="item in mockDone" 
+          v-for="item in doneItems" 
           :key="item.id" 
           :task="item" 
         />
@@ -32,6 +33,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import BoardColumn from './BoardColumn.vue';
 import TaskCard from './TaskCard.vue'
 import NewTaskInput from './NewTaskInput.vue';
@@ -41,16 +43,14 @@ const statusOptions = [
   { value: 'done', label: 'Done' },
 ]
 
-const mockTodo = [
-  { id: 1, title: 'Item 1' },
-  { id: 2, title: 'Item 2' },
-  { id: 3, title: 'Item 3' }
-]
+const todoItems = ref([]);
+const doneItems = ref([]);
 
-const mockDone = [
-  { id: 4, title: 'Item 4' },
-  { id: 5, title: 'Item 5' }
-]
+const CreateNewTask = (newTask) => {
+  newTask.status === "todo" ? todoItems.value.push(newTask) : doneItems.value.push(newTask);
+}
+
+
 </script>
 
 <style scoped>
