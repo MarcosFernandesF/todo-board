@@ -46,10 +46,13 @@ const selectValue = ref(props.options[0]?.value || '')
 const EmitTaskCreation = () => {
   if (!inputValue.value.trim()) return;
 
+  const now = new Date();
+
   emit('task-creation', {
+    id: now.getTime(),
     title: inputValue.value,
     status: selectValue.value,
-    createdAt: new Date().toLocaleString('en-US')
+    createdAt: now.toLocaleString('en-US')
   })
 
   inputValue.value = ''
