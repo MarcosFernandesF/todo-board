@@ -39,9 +39,10 @@ const onDrop = (event) => {
   border-radius: 6px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: 1px solid #767676; 
+  border-top: 4px solid #005cbf; 
   height: 100%;
-  border-top: 4px solid #005cbf;
 }
 
 h2 {
@@ -51,7 +52,7 @@ h2 {
   font-size: 1.1rem;
   color: #005cbf;
   font-weight: 600;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .column-list {
@@ -60,7 +61,7 @@ h2 {
   min-height: 200px;
   height: 100%;
   box-sizing: border-box;
-  background-color: #fafbfc;
+  background-color: #f8f9fa;
 }
 
 .empty-state {
