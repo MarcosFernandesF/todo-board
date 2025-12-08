@@ -4,10 +4,11 @@
       v-model="inputValue"
       type="text" 
       class="task-input" 
-      :placeholder="placeholder" 
+      :placeholder="placeholder"
+      aria-label="Create a new task" 
     />
 
-    <button class="add-button" @click="emitTaskCreation">
+    <button class="add-button" @click="emitTaskCreation" aria-label="Add new task">
       +
     </button>
   </div>

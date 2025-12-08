@@ -3,10 +3,15 @@
     class="task-card"
     draggable="true"
     @dragstart="onDragStart"
+    aria-roledescription="draggable card"
   >
     <div class="card-header">
       <span class="task-title">{{ task.title }}</span>
-      <button class="delete-btn" @click="$emit('task-deletion', task)">
+      <button 
+        class="delete-btn"
+        @click="$emit('task-deletion', task)"
+        :aria-label="`Delete task: ${task.title}`"
+      >
         &times;
       </button>
     </div>
