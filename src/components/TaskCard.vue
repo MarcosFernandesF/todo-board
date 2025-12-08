@@ -7,8 +7,9 @@
   >
     <div class="card-header">
       <span class="task-title">{{ task.title }}</span>
+      
       <button 
-        class="delete-btn"
+        class="delete-btn" 
         @click="$emit('task-deletion', task)"
         :aria-label="`Delete task: ${task.title}`"
       >
@@ -41,21 +42,25 @@ const onDragStart = (event) => {
 
 <style scoped>
 .task-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
   background-color: #fff;
-  padding: 12px;
-  margin-bottom: 10px;
+  border: 1px solid #e8ecef;
+  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 12px;
   cursor: grab;
   list-style: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .task-card:active {
   cursor: grabbing;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-color: #005cbf;
 }
 
 .task-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  border-color: #cfd7df;
 }
 
 .card-header {
@@ -63,33 +68,37 @@ const onDragStart = (event) => {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 8px;
+  gap: 10px;
 }
 
 .task-title {
   font-weight: 600;
-  color: #333;
+  color: #2c3e50;
+  font-size: 1rem;
+  line-height: 1.4;
   word-break: break-word;
 }
 
 .task-date {
-  color: #888;
-  font-size: 0.8rem;
+  display: block;
+  color: #95a5a6;
+  font-size: 0.75rem;
+  margin-top: 8px;
 }
 
 .delete-btn {
   background: none;
   border: none;
-  color: #ff4d4d;
-  font-size: 1.2rem;
+  color: #e74c3c;
+  font-size: 1.4rem;
+  line-height: 0.8;
   cursor: pointer;
-  padding: 0 4px;
-  opacity: 0.6;
-  transition: opacity 0.2s;
+  padding: 0 0 4px 4px;
+  opacity: 0.5;
 }
 
 .delete-btn:hover {
   opacity: 1;
-  background-color: rgba(255, 0, 0, 0.1);
-  border-radius: 4px;
+  color: #c0392b;
 }
 </style>

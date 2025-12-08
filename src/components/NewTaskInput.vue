@@ -8,7 +8,11 @@
       aria-label="Create a new task" 
     />
 
-    <button class="add-button" @click="emitTaskCreation" aria-label="Add new task">
+    <button 
+      class="add-button" 
+      @click="emitTaskCreation"
+      aria-label="Add new task"
+    >
       +
     </button>
   </div>
@@ -49,41 +53,45 @@ const emitTaskCreation = () => {
 .new-task-container {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  gap: 12px;
   background-color: #fff;
-  max-width: 800px;
-  width: 100%;
-  margin: 0px auto;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .task-input {
   flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
+  padding: 12px 16px;
+  border: 1px solid #dde2e5;
   border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
 }
 
-.task-select {
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: white;
+.task-input:focus {
+  border-color: #005cbf;
 }
 
 .add-button {
-  padding: 7px 16px;
-  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background-color: #ff6600;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 .add-button:hover {
-  background-color: #0056b3;
+  background-color: #e65c00;
 }
 </style>

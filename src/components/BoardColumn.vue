@@ -9,23 +9,20 @@
     
     <ul class="column-list" role="list">
       <slot />
-      <li v-if="isEmpty" class="empty-state">No tasks here</li>
+      <li v-if="!hasTasks" class="empty-state">No tasks yet</li>
     </ul>
   </section>
 </template>
 
 <script setup>
-import { computed, useSlots } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
-  title: { type: String, required: true }
+  title: { type: String, required: true },
+  hasTasks: { type: Boolean, default: false }
 })
 
-// Generates a secure id (ex: "To Do" -> "todo")
 const formattedId = computed(() => props.title.toLowerCase().replace(/\s+/g, '-'));
-
-const slots = useSlots();
-const isEmpty = computed(() => !slots.default); 
 
 const emit = defineEmits(['task-dropped'])
 
@@ -38,33 +35,40 @@ const onDrop = (event) => {
 
 <style scoped>
 .board-column {
-  border: 1px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-  min-width: 200px;
+  background-color: #fff;
+  border-radius: 6px;
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  height: 100%;
+  border-top: 4px solid #005cbf;
 }
 
 h2 {
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
+  text-align: left;
+  margin: 0;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  color: #005cbf;
+  font-weight: 600;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .column-list {
-  padding: 0;
+  padding: 20px;
   margin: 0;
-  min-height: 100px;
+  min-height: 200px;
   height: 100%;
+  box-sizing: border-box;
+  background-color: #fafbfc;
 }
 
 .empty-state {
     list-style: none;
-    color: #888;
+    color: #a0a0a0;
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
     font-style: italic;
+    font-size: 0.9rem;
 }
 </style>
