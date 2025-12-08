@@ -3,6 +3,12 @@
     <h1>TODO-BOARD</h1>
   </header>
 
+  <NewTaskInput 
+    class="task-input-container"
+    :options="statusOptions"
+    placeholder="Type the title of your task..."
+  />
+
   <main class="board-columns">
     <section class="board-column">
       <BoardColumn title="To Do">
@@ -28,6 +34,12 @@
 <script setup>
 import BoardColumn from './BoardColumn.vue';
 import TaskCard from './TaskCard.vue'
+import NewTaskInput from './NewTaskInput.vue';
+
+const statusOptions = [
+  { value: 'todo', label: 'To Do' },
+  { value: 'done', label: 'Done' },
+]
 
 const mockTodo = [
   { id: 1, title: 'Item 1' },
