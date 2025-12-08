@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>TODO-BOARD</h1>
-    <button @click="ClearStorage">
+    <button @click="clearStorage">
        Clear Storage
     </button>
   </header>
@@ -10,12 +10,12 @@
     class="task-input-container"
     :options="statusOptions"
     placeholder="Type the title of your task..."
-    @task-creation="CreateNewTask"
+    @task-creation="createNewTask"
   />
 
   <main class="board-columns">
     <section class="board-column">
-      <BoardColumn title="To Do">
+      <BoardColumn title="To Do" @task-dropped="onTaskDrop($event, 'todo')">
         <TaskCard 
           v-for="item in todoListSorted" 
           :key="item.id" 
@@ -24,7 +24,7 @@
       </BoardColumn>
     </section>
     <section>
-      <BoardColumn title="Done">
+      <BoardColumn title="Done" @task-dropped="onTaskDrop($event, 'done')">
         <TaskCard 
           v-for="item in doneListSorted" 
           :key="item.id" 
@@ -73,7 +73,7 @@ onMounted(() => {
   if (storedDone) doneItems.value = JSON.parse(storedDone);
 });
 
-const CreateNewTask = (newTask) => {
+const createNewTask = (newTask) => {
   if (newTask.status === "todo") {
     todoItems.value.push(newTask);
   } else {
@@ -81,7 +81,48 @@ const CreateNewTask = (newTask) => {
   }
 }
 
-const ClearStorage = () => {
+const removeFromList = (originStatus, taskId) =>
+{
+  let taskToMove = null;
+
+  if (originStatus === 'todo') {
+    const index = todoItems.value.findIndex(t => t.id === taskId);
+    if (index !== -1) {
+      taskToMove = todoItems.value.splice(index, 1)[0];
+    }
+  } else {
+    const index = doneItems.value.findIndex(t => t.id === taskId);
+    if (index !== -1) {
+      taskToMove = doneItems.value.splice(index, 1)[0];
+    }
+  }
+
+  return taskToMove;
+}
+
+const addToList = (targetStatus, taskToMove) =>
+{
+  if (taskToMove) {
+    taskToMove.status = targetStatus;
+    
+    if (targetStatus === 'todo') {
+      todoItems.value.push(taskToMove);
+    } else {
+      doneItems.value.push(taskToMove);
+    }
+  }
+}
+
+const onTaskDrop = ({ taskID, originStatus }, targetStatus) => {
+  if (originStatus === targetStatus) return;
+
+  const id = Number(taskID);
+  const taskToMove = removeFromList(originStatus, id);
+
+  addToList(targetStatus, taskToMove);
+}
+
+const clearStorage = () => {
   localStorage.removeItem(STORAGE_KEY_TODO);
   localStorage.removeItem(STORAGE_KEY_DONE);
   todoItems.value = [];
