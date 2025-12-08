@@ -19,7 +19,8 @@
         <TaskCard 
           v-for="item in todoListSorted" 
           :key="item.id" 
-          :task="item" 
+          :task="item"
+          @task-deletion="deleteTask"
         />
       </BoardColumn>
     </section>
@@ -28,7 +29,8 @@
         <TaskCard 
           v-for="item in doneListSorted" 
           :key="item.id" 
-          :task="item" 
+          :task="item"
+          @task-deletion="deleteTask"
         />
       </BoardColumn>
     </section>
@@ -52,6 +54,11 @@ const statusOptions = [
 const todoItems = ref([]);
 const doneItems = ref([]);
 
+const listMap = {
+  'todo': todoItems,
+  'done': doneItems
+};
+
 const todoListSorted = computed(() => {
   return [...todoItems.value].sort((a, b) => b.id - a.id);
 });
@@ -73,43 +80,32 @@ onMounted(() => {
   if (storedDone) doneItems.value = JSON.parse(storedDone);
 });
 
+const removeTaskFromList = (status, taskId) => {
+  const list = listMap[status];
+  if (!list) return null;
+
+  const index = list.value.findIndex(t => t.id === taskId);
+  if (index !== -1) {
+    return list.value.splice(index, 1)[0];
+  }
+  return null;
+}
+
+const addTaskToList = (status, task) => {
+  const list = listMap[status];
+  if (list && task) {
+    task.status = status;
+    list.value.push(task);
+  }
+}
+
 const createNewTask = (newTask) => {
-  if (newTask.status === "todo") {
-    todoItems.value.push(newTask);
-  } else {
-    doneItems.value.push(newTask);
-  }
+  addTaskToList(newTask.status, newTask);
 }
 
-const removeFromList = (originStatus, taskId) =>
-{
-  let taskToMove = null;
-
-  if (originStatus === 'todo') {
-    const index = todoItems.value.findIndex(t => t.id === taskId);
-    if (index !== -1) {
-      taskToMove = todoItems.value.splice(index, 1)[0];
-    }
-  } else {
-    const index = doneItems.value.findIndex(t => t.id === taskId);
-    if (index !== -1) {
-      taskToMove = doneItems.value.splice(index, 1)[0];
-    }
-  }
-
-  return taskToMove;
-}
-
-const addToList = (targetStatus, taskToMove) =>
-{
-  if (taskToMove) {
-    taskToMove.status = targetStatus;
-    
-    if (targetStatus === 'todo') {
-      todoItems.value.push(taskToMove);
-    } else {
-      doneItems.value.push(taskToMove);
-    }
+const deleteTask = (task) => {
+  if (confirm(`Are you sure that you want to delete "${task.title}"?`)) {
+    removeTaskFromList(task.status, task.id);
   }
 }
 
@@ -117,16 +113,18 @@ const onTaskDrop = ({ taskID, originStatus }, targetStatus) => {
   if (originStatus === targetStatus) return;
 
   const id = Number(taskID);
-  const taskToMove = removeFromList(originStatus, id);
+  const taskToMove = removeTaskFromList(originStatus, id);
 
-  addToList(targetStatus, taskToMove);
+  if (taskToMove) {
+    addTaskToList(targetStatus, taskToMove);
+  }
 }
 
 const clearStorage = () => {
-  localStorage.removeItem(STORAGE_KEY_TODO);
-  localStorage.removeItem(STORAGE_KEY_DONE);
-  todoItems.value = [];
-  doneItems.value = [];
+    localStorage.removeItem(STORAGE_KEY_TODO);
+    localStorage.removeItem(STORAGE_KEY_DONE);
+    todoItems.value = [];
+    doneItems.value = [];
 }
 </script>
 
