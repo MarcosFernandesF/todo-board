@@ -19,10 +19,6 @@ import { ref } from 'vue'
 const emit = defineEmits(['task-creation'])
 
 defineProps({
-  options: {
-    type: Array,
-    required: true
-  },
   placeholder: {
     type: String,
     default: 'Default Placeholder...'
