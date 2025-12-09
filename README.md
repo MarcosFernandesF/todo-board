@@ -2,7 +2,7 @@
 
 ## Descrição do Projeto
 
-Esta aplicação é um gerenciador de tarefas baseada em quadros, desenvolvida como parte de um desafio técnico para a vaga de Front-end Developer. O objetivo foi criar uma interface funcional e responsiva utilizando Vue 3, sem dependência de bibliotecas externas para as funcionalidades principais.
+Esta aplicação é um gerenciador de tarefas baseada em quadros. O objetivo foi criar uma interface funcional e responsiva utilizando Vue 3, sem dependência de bibliotecas externas para as funcionalidades principais.
 
 O projeto foca em arquitetura limpa, separação de responsabilidades e persistência de dados.
 
