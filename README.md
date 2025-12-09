@@ -1,4 +1,4 @@
-# Frontend Challenge - Todo Board
+# Todo Board
 
 ## Descrição do Projeto
 
