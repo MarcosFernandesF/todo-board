@@ -18,7 +18,7 @@
           @task-dropped="onTaskDrop($event, TASK_STATUS.TODO)"
         >
           <TaskCard 
-            v-for="item in todoListSorted" 
+            v-for="item in todoList" 
             :key="item.id" 
             :task="item"
             @task-deletion="deleteTask"
@@ -33,7 +33,7 @@
           @task-dropped="onTaskDrop($event, TASK_STATUS.DONE)"
         >
           <TaskCard 
-            v-for="item in doneListSorted" 
+            v-for="item in doneList" 
             :key="item.id" 
             :task="item"
             @task-deletion="deleteTask"
@@ -54,15 +54,15 @@ import { useTaskBoard } from '@/composables/useTaskBoard';
 import { TASK_STATUS } from '@/constants/TaskConstants';
 
 const { 
-  todoListSorted, 
-  doneListSorted, 
+  todoList, 
+  doneList, 
   createNewTask, 
   deleteTask, 
   onTaskDrop, 
 } = useTaskBoard();
 
-const hasTodoTasks = computed(() => todoListSorted.value.length > 0);
-const hasDoneTasks = computed(() => doneListSorted.value.length > 0);
+const hasTodoTasks = computed(() => todoList.value.length > 0);
+const hasDoneTasks = computed(() => doneList.value.length > 0);
 </script>
 
 <style scoped>
