@@ -4,6 +4,5 @@ export const TASK_STATUS = {
 };
 
 export const STORAGE_KEYS = {
-  TODO: 'todo-items',
-  DONE: 'done-items'
+  BOARDS_ITEMS: 'boards-items'
 };
