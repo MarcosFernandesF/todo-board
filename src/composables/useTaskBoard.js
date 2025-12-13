@@ -18,13 +18,17 @@ export function useTaskBoard() {
   const todoList = computed(() => boardsItems.value.filter((item) => item.status === TASK_STATUS.TODO));
   const doneList = computed(() => boardsItems.value.filter((item) => item.status === TASK_STATUS.DONE));
 
+  const saveItemsOnLocalStorage = () => {
+    localStorage.setItem(STORAGE_KEYS.BOARDS_ITEMS, JSON.stringify(boardsItems.value));
+  }
+
   /**
    * Creates a new task and adds it to the appropriate list.
    * @param {Object} newTask 
    */
   const createNewTask = (newTask) => {
     boardsItems.value.unshift(newTask);
-    localStorage.setItem(STORAGE_KEYS.BOARDS_ITEMS, JSON.stringify(boardsItems.value));
+    saveItemsOnLocalStorage();
   };
 
   /**
@@ -50,7 +54,7 @@ export function useTaskBoard() {
 
     taskToMove.status = targetStatus;
 
-    localStorage.setItem(STORAGE_KEYS.BOARDS_ITEMS, JSON.stringify(boardsItems.value));
+    saveItemsOnLocalStorage()
   };
 
   return {
