@@ -46,8 +46,7 @@ export function useTaskBoard() {
   const onTaskDrop = ({ taskID, originStatus }, targetStatus) => {
     if (originStatus === targetStatus) return;
 
-    const taskToMove = boardsItems.value.find((item) => item.id === taskID);
-    console.log(taskToMove, taskID, boardsItems.value);
+    const taskToMove = boardsItems.value.find((item) => item.id === Number(taskID));
 
     taskToMove.status = targetStatus;
 
